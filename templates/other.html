@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Other Tools - ENSAM HUB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: rgba(255,255,255,0.06);
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tool-card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 250px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+            transition: transform 0.25s, background 0.25s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-6px);
+            background: rgba(56,189,248,0.18);
+        }
+
+        .home-btn {
+            margin-bottom: 30px;
+            background: rgba(56,189,248,0.18);
+            border: 1px solid rgba(56,189,248,0.4);
+            padding: 10px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .home-btn:hover {
+            background: rgba(56,189,248,0.35);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<a href="/index" class="home-btn">🏠 Home</a>
+
+<h1>Other Tools</h1>
+
+<div class="tools-grid">
+    <a class="tool-card" href="https://notebooklm.google/">
+        Notebook LM
+    </a>
+    <a class="tool-card" href="https://www.ilovepdf.com/">
+        iLovePDF
+    </a>
+    <a class="tool-card" href="https://drive.google.com/drive/folders/1NVyG-ik27xzBvfrcver1T3-tGr-lcB6v?usp=drive_link">
+        CPGE Resources Drive
+    </a>
+    <a class="tool-card" href="https://www.elearning-cpge.com/">
+        E-learning CPGE
+    </a>    
+    <a class="tool-card" href="https://e-preparatoire.blogspot.com/p/e-preparatoire.html">
+        Books 
+    </a>
+    <a class="tool-card" href="https://www.bibmath.net/">
+        Bibmath-> maths
+    </a>
+</div>
+
+</body>
+</html>

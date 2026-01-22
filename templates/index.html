@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENSAM FOCUS HUB</title>
+<style>
+    :root {
+        --bg-color: #0f172a;
+        --accent-color: #129ce0;
+        --text-color: #f1f5f9;
+        --card-bg: #0f172a;
+        --me:#253761;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0 20px;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* Container for title + buttons fills full viewport */
+    .hero {
+        min-height: 100vh; /* full screen */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title_display {
+        background: var(--card-bg);
+        backdrop-filter: blur(15px);
+        padding: 2rem 3rem;
+        border-radius: 30px;
+        border: 1px solid rgba(7, 213, 249, 0.728);
+        text-align: center;
+        box-shadow: 0 40px 60px rgba(12, 160, 223, 0.128);
+        width: 400px;
+        margin-bottom: 30px;
+    }
+
+    .tool_buttons {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+    }
+
+    .tool-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 90px;
+        background: var(--me);
+        border: 1px solid rgba(7, 217, 249, 0.5);
+        border-radius: 15px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        color: var(--text-color);
+        position: relative;
+    }
+
+    .tool-btn img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+    }
+
+    .tool-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 25px rgba(225, 95, 242, 0.902);
+    }
+
+    /* Hover description tooltip */
+    .tool-btn span {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(56,189,248,0.8);
+        color: #ffffff;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        opacity: 0;
+        white-space: nowrap;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
+
+    .tool-btn:hover span {
+        opacity: 1;
+    }
+
+    /* Bio / Contacts sections */
+    section {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 40px 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    section h2 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    section p {
+        text-align: center;
+        line-height: 1.6;
+    }
+    .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.social-icons a img {
+    transition: transform 0.2s, filter 0.2s;
+    filter: brightness(1.2);
+}
+
+.social-icons a img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.5);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Hero Section: Visible on page load -->
+<div class="hero">
+    <div class="title_display">
+        <h1>Welcome to ENSAM FOCUS HUB</h1>
+        <p>Your all-in-one productivity companion during your Integrated Preparatory Cycle</p>
+        
+    </div>
+
+    <div class="tool_buttons">
+        <a href="/notes" class="tool-btn">
+            <img src="static/icons/notes.png" alt="Notes Icon">
+            <span>Take Notes</span>
+        </a>
+        <a href="/pomodoro" class="tool-btn">
+            <img src="static/icons/pomodoro.png" alt="Pomodoro Icon">
+            <span>Pomodoro Timer</span>
+        </a>
+        <a href="/other" class="tool-btn">
+            <img src="static/icons/other.png" alt="Other Tools Icon">
+            <span>Other Tools</span>
+        </a>
+        <a href="/drives" class="tool-btn">
+            <img src="static/icons/drives.png" alt="Drives Icon">
+            <span>Access Drives</span>
+        </a>  
+        <a href="/focus" class="tool-btn">
+            <img src="static/icons/focus.png" alt="Focus Mode Icon">
+            <span>Focus Mode</span>  
+        </a>
+    </div>
+</div>
+
+<!-- Sections below the fold -->
+<section id="bio">
+    <h2>About Me & Ensam Hub Project Philosophy</h2>
+    <p>Hello! I'm EL MEHDI, an engineering student at ENSAM Casablanca. I created ENSAM FOCUS HUB to help students—especially freshmen—stay organized. This platform centralizes everything you need, from note-taking and Pomodoro timers to essential resources, to simplify your studying and boost daily productivity.</p>
+</section>
+
+<section id="contacts">
+    <h2>Contacts</h2>
+    <p> Feel free to reach out to me via email or connect with me on social media!</strong></p>
+
+    <div class="social-icons">
+        <a href="achakmehdi03@gmail.com" target="_blank">
+            <img src="static/icons/contact.png" alt="Gmail" title="Gmail" width="30">
+        </a>
+        <a href="https://github.com/valak-zo5" target="_blank">
+            <img src="static/icons/github.png" alt="GitHub" title="GitHub" width="30">
+        </a>
+        
+    </div>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENSAM Focus Mode</title>
+<style>
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #111;
+    --card-bg: rgba(255,255,255,0.8);
+    --accent-color: #38bdf8;
+    --success-color: #19cb5a;
+}
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --text-color: #f1f5f9;
+    --card-bg: rgba(20,30,50,0.8);
+    --accent-color: #38bdf8;
+}
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+    position: relative;
+}
+h1 { margin-bottom: 20px; text-align:center; }
+
+.card {
+    background: var(--card-bg);
+    padding: 25px 40px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(66, 9, 222, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 300px;
+}
+
+#statusMessage {
+    height: 24px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--success-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#statusMessage.visible {
+    opacity: 1;
+    animation: pulse 1.5s infinite;
+}
+
+button {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: #38bdf8 0px 4px 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+button:hover { transform: scale(1.05); }
+.home-btn {
+            margin-bottom: 30px;
+            background: rgba(56,189,248,0.18);
+            border: 1px solid rgba(56,189,248,0.4);
+            padding: 10px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .home-btn:hover {
+            background: rgba(56,189,248,0.35);
+            transform: translateY(-2px);
+        }
+#themeBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+@keyframes sessionComplete {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(72, 168, 247, 0.941);}
+    50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(108, 4, 227, 0.8);}
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(56,189,248,0);}
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+</style>
+</head>
+<body data-theme="dark">
+<a href="/index" class="home-btn">🏠 Home</a>
+<h1>Focus Mode - ENSAM HUB</h1>
+
+<div class="card" id="timerCard">
+    <h2>Pomodoro Timer</h2>
+    <div id="timerDisplay" style="font-size:3rem;">25:00</div>
+    <div id="statusMessage">Time's up! Take a break.</div>
+    
+    <button id="startBtn">START</button>
+    <button id="resetBtn">RESET</button>
+</div>
+
+<div class="card">
+    <h2>Stats</h2>
+    <p>Sessions Completed: <span id="sessions">0</span></p>
+</div>
+
+<button id="themeBtn">Toggle Dark/Bright</button>
+
+<script>
+let timer;
+let timeLeft = 25 * 60;
+let running = false;
+let sessionsCompleted = 0;
+
+const timerDisplay = document.getElementById("timerDisplay");
+const startBtn = document.getElementById("startBtn");
+const resetBtn = document.getElementById("resetBtn");
+const sessionsEl = document.getElementById("sessions");
+const timerCard = document.getElementById("timerCard");
+const statusMsg = document.getElementById("statusMessage");
+
+function updateTimerDisplay() {
+    const min = Math.floor(timeLeft/60).toString().padStart(2,'0');
+    const sec = (timeLeft%60).toString().padStart(2,'0');
+    timerDisplay.textContent = `${min}:${sec}`;
+}
+
+function startTimer() {
+    if (running) return;
+    
+    // Clear status when starting
+    statusMsg.classList.remove("visible");
+    
+    running = true;
+    startBtn.textContent = "PAUSE";
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if(timeLeft <= 0){
+            clearInterval(timer);
+            running = false;
+            sessionsCompleted++;
+            sessionsEl.textContent = sessionsCompleted;
+
+            // Trigger visual feedback
+            timerCard.style.animation = "none";
+            void timerCard.offsetWidth;
+            timerCard.style.animation = "sessionComplete 0.6s ease-in-out";
+
+            // Show text message instead of alert
+            statusMsg.classList.add("visible");
+            
+            timeLeft = 25*60;
+            updateTimerDisplay();
+            startBtn.textContent = "START";
+        }
+    }, 1000);
+}
+
+function pauseTimer() {
+    clearInterval(timer);
+    running = false;
+    startBtn.textContent = "START";
+}
+
+startBtn.addEventListener("click", () => {
+    running ? pauseTimer() : startTimer();
+});
+
+resetBtn.addEventListener("click", () => {
+    pauseTimer();
+    statusMsg.classList.remove("visible"); // Clear message on reset
+    timeLeft = 25 * 60;
+    updateTimerDisplay();
+});
+
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("click", () => {
+    const body = document.body;
+    body.dataset.theme = (body.dataset.theme === "light") ? "dark" : "light";
+});
+</script>
+
+</body>
+</html>
