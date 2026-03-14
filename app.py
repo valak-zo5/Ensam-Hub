@@ -37,7 +37,9 @@ def focus():
 def other():
     return render_template("other.html")
 
-
+@app.route("/pdf_converter")
+def pdf_to_black_converter():
+    return render_template("pdf_to_black.html")
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
